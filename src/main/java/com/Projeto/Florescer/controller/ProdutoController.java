@@ -17,7 +17,8 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity catchALL(){
-        return ResponseEntity.ok("ok");
+        var list = produtoRepository.findAll();
+        return ResponseEntity.ok(list);
     }
 
 }
