@@ -1,14 +1,13 @@
 package com.Projeto.Florescer.controller;
 
 
+import com.Projeto.Florescer.model.Produto;
 import com.Projeto.Florescer.repository.ProdutoRepository;
 import com.Projeto.Florescer.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/produtos")
@@ -26,6 +25,17 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable Long id){
         return ResponseEntity.ok(repository.searchById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Produto> saveProduct(@Valid @RequestBody Produto produto){
+        return ResponseEntity.ok(repository.save(produto));
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> updateProduct(@PathVariable Long id, @Valid @RequestBody Produto produto){
+        return ResponseEntity.ok(repository.updateByid(id, produto));
     }
 
 }

@@ -23,4 +23,20 @@ public class ProdutoService {
         return produtoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado!"));
     }
+
+    public Produto save(Produto produto){
+        return produtoRepository.save(produto);
+    }
+
+    public Produto updateByid(Long id, Produto produtoN){
+        Produto produto = searchById(id);
+        produto.setDescricao(produtoN.getDescricao());
+        produto.setCategoria(produtoN.getCategoria());
+        produto.setPreco(produtoN.getPreco());
+        produto.setQuantidadeEstoque(produtoN.getQuantidadeEstoque());
+        produto.setUnidadeMedida(produtoN.getUnidadeMedida());
+        produto.setCodigoBarras(produtoN.getCodigoBarras());
+        produto.setFornecedor(produtoN.getFornecedor());
+        return  produtoRepository.save(produto);
+    }
 }
